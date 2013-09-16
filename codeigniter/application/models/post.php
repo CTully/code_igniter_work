@@ -22,26 +22,25 @@ error_reporting(E_ALL | E_STRICT);
      $this->db->select()->from('posts')->where(array('active'=>1,'postID'=>$postID))->order_by('date_added','desc');
      $query=$this->db->get();
      return $query->first_row('array');
- }
+     }
  
- function insert_post($data)
- {
-   $this->db->insert('posts',$data);
-   return $this->db->insert_id();
+    function insert_post($data){
+      $this->db->insert('posts',$data);
+      return $this->db->insert_id();
+    
+    }
  
- }
+   function update_post($postID,$data){
+   $this->where('postID',$postID);
+   $this->db->update('posts',$data);
+   
+   }
  
- function update_post($postID,$data){
- $this->where('postID',$postID);
- $this->db->update('posts',$data);
- 
- }
- 
- function delete_post($postID){
-  
-   $this->db->where('postID',$postID);
-   $this->db->delete('posts');
- }
+   function delete_post($postID){
+    
+     $this->db->where('postID',$postID);
+     $this->db->delete('posts');
+   }
  
     }
     //inserts a post
